@@ -1,40 +1,28 @@
+import streamlit as st
 
-# Simple Calculator in Python
+# Title of the app
+st.title("Simple Calculator")
 
-def calculator():
-    print("Simple Calculator")
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+# Input fields for the numbers
+num1 = st.number_input("Enter the first number:", step=1.0)
+num2 = st.number_input("Enter the second number:", step=1.0)
 
-    while True:
-        choice = input("Enter choice (1/2/3/4) or 'exit' to quit: ")
+# Selection of operation
+operation = st.selectbox("Select Operation", ("Add", "Subtract", "Multiply", "Divide"))
 
-        if choice == 'exit':
-            print("Exiting the calculator.")
-            break
-
-        if choice in ('1', '2', '3', '4'):
-            try:
-                num1 = float(input("Enter first number: "))
-                num2 = float(input("Enter second number: "))
-
-                if choice == '1':
-                    print(f"{num1} + {num2} = {num1 + num2}")
-                elif choice == '2':
-                    print(f"{num1} - {num2} = {num1 - num2}")
-                elif choice == '3':
-                    print(f"{num1} * {num2} = {num1 * num2}")
-                elif choice == '4':
-                    if num2 == 0:
-                        print("Error: Division by zero.")
-                    else:
-                        print(f"{num1} / {num2} = {num1 / num2}")
-            except ValueError:
-                print("Invalid input. Please enter numeric values.")
-        else:
-            print("Invalid choice. Please select a valid operation.")
-
-calculator()
+# Perform calculation based on the selected operation
+if operation == "Add":
+    result = num1 + num2
+    st.write("Result:", result)
+elif operation == "Subtract":
+    result = num1 - num2
+    st.write("Result:", result)
+elif operation == "Multiply":
+    result = num1 * num2
+    st.write("Result:", result)
+elif operation == "Divide":
+    if num2 != 0:
+        result = num1 / num2
+        st.write("Result:", result)
+    else:
+        st.write("Error: Cannot divide by zero")
